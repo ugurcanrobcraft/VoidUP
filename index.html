@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoidUP - Profesyonel İletişimin Adresi</title>
@@ -23,10 +23,10 @@
         .auth-subtitle { color: #9098c0; text-align: center; margin-bottom: 24px; font-size: 14px; }
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #b8bfe0; letter-spacing: 0.5px; }
-        .input-group input {
+        .input-group input, .input-group textarea {
             width: 100%; padding: 12px; background-color: #0d0d1f; border: 1px solid transparent; border-radius: 6px; color: #dbe0f5; font-size: 15px; outline: none; transition: border-color 0.2s, background-color 0.2s;
         }
-        .input-group input:focus { border-color: #7c3aed; background-color: #08080f; }
+        .input-group input:focus, .input-group textarea:focus { border-color: #7c3aed; background-color: #08080f; }
         .auth-btn {
             width: 100%; background-color: #7c3aed; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, transform 0.1s;
         }
@@ -51,6 +51,8 @@
         .server-icon.add-btn:hover { background-color: #2563eb; color: white; border-style: solid; border-radius: 16px; }
         .server-icon.explore-btn { background-color: #171730; color: #3b82f6; font-size: 20px; }
         .server-icon.explore-btn:hover { background-color: #3b82f6; color: white; border-radius: 16px; }
+        .server-icon.dm-btn { background-color: #171730; color: #a855f7; font-size: 20px; }
+        .server-icon.dm-btn:hover { background-color: #a855f7; color: white; border-radius: 16px; }
 
         .channels-sidebar { width: 240px; background-color: #171730; display: flex; flex-direction: column; position: relative; border-right: 1px solid rgba(0,0,0,0.2); }
         .channels-header { 
@@ -84,19 +86,24 @@
         .user-settings-btn:hover { background-color: rgba(255,255,255,0.08); color: white; }
 
         .main-chat-area { flex: 1; background-color: #1c1c3a; display: flex; flex-direction: column; }
-        .chat-header { height: 48px; border-bottom: 2px solid #0a0a18; display: flex; align-items: center; padding: 0 16px; font-weight: 700; color: white; box-shadow: 0 1px 2px rgba(0,0,0,0.2); font-size: 15px; }
+        .chat-header { height: 48px; border-bottom: 2px solid #0a0a18; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-weight: 700; color: white; box-shadow: 0 1px 2px rgba(0,0,0,0.2); font-size: 15px; }
         .chat-content { flex: 1; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; overflow-y: auto; gap: 10px; }
         .chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
         .chat-messages::-webkit-scrollbar { width: 8px; }
         .chat-messages::-webkit-scrollbar-thumb { background: #0a0a18; border-radius: 4px; }
         
-        .message-row { display: flex; gap: 12px; align-items: flex-start; padding: 6px 8px; border-radius: 6px; transition: background 0.15s; }
+        .message-row { display: flex; gap: 12px; align-items: flex-start; padding: 6px 8px; border-radius: 6px; transition: background 0.15s; position: relative; }
         .message-row:hover { background-color: rgba(255,255,255,0.015); }
-        .msg-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #7c3aed; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 16px; flex-shrink: 0; background-size: cover; background-position: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .msg-body { display: flex; flex-direction: column; gap: 2px; }
+        .message-row:hover .msg-actions { display: flex; }
+        .msg-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #7c3aed; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 16px; flex-shrink: 0; background-size: cover; background-position: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; }
+        .msg-body { display: flex; flex-direction: column; gap: 2px; flex: 1; }
         .msg-header { display: flex; align-items: center; gap: 8px; }
-        .msg-username { font-weight: 600; color: white; font-size: 15px; }
+        .msg-username { font-weight: 600; color: white; font-size: 15px; cursor: pointer; }
+        .msg-username:hover { text-decoration: underline; }
         .msg-text { color: #dbe0f5; font-size: 14px; word-break: break-all; line-height: 1.4; }
+        .msg-actions { display: none; position: absolute; right: 10px; top: 4px; background: #171730; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; gap: 4px; padding: 2px; }
+        .msg-action-btn { background: transparent; border: none; color: #b8bfe0; cursor: pointer; padding: 4px 8px; font-size: 12px; border-radius: 3px; }
+        .msg-action-btn:hover { background: #7c3aed; color: white; }
 
         .chat-input-box { width: 100%; background-color: #232350; border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
         .chat-input-box input { width: 100%; background: transparent; border: none; outline: none; color: white; font-size: 15px; }
@@ -116,9 +123,10 @@
         .explore-container { padding: 32px; flex: 1; overflow-y: auto; background-color: #1c1c3a; }
         .explore-title { font-size: 26px; font-weight: bold; color: white; margin-bottom: 24px; letter-spacing: 0.3px; }
         .explore-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-        .explore-card { background-color: #171730; padding: 24px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s, box-shadow 0.2s; }
+        .explore-card { background-color: #171730; padding: 24px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
         .explore-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-        .explore-card h3 { color: white; font-size: 18px; font-weight: 600; text-align: center; }
+        .explore-card h3 { color: white; font-size: 18px; font-weight: 600; }
+        .explore-card p { color: #9098c0; font-size: 13px; line-height: 1.3; }
         .join-server-btn { background-color: #2563eb; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s; }
         .join-server-btn:hover { background-color: #1d4ed8; }
 
@@ -127,12 +135,16 @@
         .modal-box { background-color: #1c1c3a; width: 440px; border-radius: 10px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6); padding: 24px; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.04); animation: scaleIn 0.2s ease-out; }
         @keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-box h3 { color: white; margin-bottom: 18px; font-size: 20px; font-weight: 700; }
-        .modal-box input { width: 100%; padding: 12px; background-color: #0d0d1f; border: 1px solid transparent; border-radius: 6px; color: white; margin-bottom: 16px; outline: none; font-size: 14px; transition: border-color 0.2s; }
-        .modal-box input:focus { border-color: #7c3aed; }
+        .modal-box input, .modal-box textarea, .modal-box select { width: 100%; padding: 12px; background-color: #0d0d1f; border: 1px solid transparent; border-radius: 6px; color: white; margin-bottom: 16px; outline: none; font-size: 14px; transition: border-color 0.2s; }
+        .modal-box input:focus, .modal-box textarea:focus, .modal-box select:focus { border-color: #7c3aed; }
         .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
         
         .server-profile-edit-box { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; background: #0d0d1f; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
         .preview-server-icon { width: 52px; height: 52px; border-radius: 50%; background-color: #7c3aed; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; background-size: cover; background-position: center; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        
+        /* PROFİL KARTI MODALI */
+        .profile-card-modal { background: #171730; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+        .profile-card-avatar { width: 80px; height: 80px; border-radius: 50%; background-size: cover; background-position: center; background-color: #7c3aed; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -173,16 +185,21 @@
     <div id="app-screen">
         <div class="servers-sidebar" id="serversSidebar">
             <div class="server-icon explore-btn" onclick="showExplore()" title="Keşfet">🌐</div>
+            <div class="server-icon dm-btn" onclick="showDirectMessages()" title="Özel Mesajlar">💬</div>
             <div style="width: 32px; height: 2px; background-color: #282850; border-radius: 1px;"></div>
             <div class="server-icon add-btn" onclick="openServerModal()" title="Sunucu Oluştur">+</div>
         </div>
 
-        <div class="channels-sidebar">
+        <div class="channels-sidebar" id="channelsSidebar">
             <div class="channels-header" id="channelsHeader" onclick="toggleServerDropdown()">VOIDUP</div>
             
             <div class="server-dropdown" id="serverDropdown">
-                <div class="dropdown-item" style="color: #9098c0; cursor: default;">Üye Sayısı: <span id="memberCount" style="color:white; font-weight:bold;">1</span></div>
-                <div class="dropdown-item" onclick="openSettingsModal()">Sunucu Ayarları</div>
+                <div class="dropdown-item" style="color: #9098c0; cursor: default;">Üye Sayısı: <span id="memberCount" style="color:white; font-weight:bold;">1</span> / 100</div>
+                <div class="dropdown-item" onclick="openSettingsModal()" id="menuServerSettings">Sunucu Ayarları</div>
+                <div class="dropdown-item" onclick="openRolesModal()" id="menuServerRoles">Rol Yönetimi</div>
+                <div class="dropdown-item" onclick="openCategoryModal()" id="menuServerCat">Kategori Oluştur</div>
+                <div class="dropdown-item" onclick="openChannelModalNoCategory()" id="menuServerChan">Kanal Oluştur</div>
+                <div class="dropdown-item" onclick="openInviteModal()">Davet Linki Al</div>
             </div>
 
             <div class="channels-list" id="channelsList">
@@ -199,7 +216,10 @@
         </div>
 
         <div class="main-chat-area" id="mainArea">
-            <div class="chat-header" id="chatHeader"># genel</div>
+            <div class="chat-header" id="chatHeader">
+                <span id="chatHeaderTitle"># genel</span>
+                <span id="chatHeaderDesc" style="font-size: 12px; color: #9098c0; font-weight: normal;"></span>
+            </div>
             <div class="explore-container" id="exploreView" style="display:none;">
                 <div class="explore-title">Keşfet</div>
                 <div class="explore-grid" id="exploreGrid"></div>
@@ -216,7 +236,7 @@
     <!-- MODALLAR -->
     <div class="modal" id="serverModal">
         <div class="modal-box">
-            <h3>Sunucu Oluştur</h3>
+            <h3>Sunucu Oluştur (Limit: 50)</h3>
             <input type="text" id="serverNameInput" placeholder="Sunucu Adı">
             <div class="modal-footer">
                 <button onclick="closeServerModal()" style="background:transparent; border:none; color:white; cursor:pointer; font-weight:500;">İptal</button>
@@ -231,6 +251,9 @@
             <h3>Sunucu Ayarları</h3>
             <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Sunucu Adı</label>
             <input type="text" id="editServerNameInput">
+
+            <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Sunucu Açıklaması</label>
+            <textarea id="editServerDescInput" rows="3" placeholder="Sunucunuzu anlatın..."></textarea>
             
             <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; display:block; margin-bottom:8px;">Sunucu İkonu</label>
             <div class="server-profile-edit-box">
@@ -245,12 +268,47 @@
         </div>
     </div>
 
+    <!-- ROL YÖNETİMİ MODALI -->
+    <div class="modal" id="rolesModal">
+        <div class="modal-box">
+            <h3>Rol Yönetimi</h3>
+            <div style="margin-bottom: 15px;">
+                <input type="text" id="newRoleNameInput" placeholder="Yeni Rol Adı">
+                <div style="display: flex; gap: 15px; margin-bottom: 10px; font-size: 13px; color: #b8bfe0;">
+                    <label><input type="checkbox" id="rolePermBan"> Banlama Yetkisi</label>
+                    <label><input type="checkbox" id="rolePermDel"> Mesaj Silme Yetkisi</label>
+                </div>
+                <button onclick="createRole()" class="auth-btn" style="padding: 8px;">Rol Oluştur</button>
+            </div>
+            <div id="rolesListContainer" style="display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto;"></div>
+            <div class="modal-footer">
+                <button onclick="closeRolesModal()" class="auth-btn" style="width: auto; padding: 8px 20px;">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAVET MODALI -->
+    <div class="modal" id="inviteModal">
+        <div class="modal-box">
+            <h3>Sunucu Davet Linki</h3>
+            <input type="text" id="inviteLinkInput" readonly>
+            <div class="modal-footer">
+                <button onclick="copyInviteLink()" class="auth-btn" style="width: auto; padding: 8px 20px;">Kopyala</button>
+                <button onclick="closeInviteModal()" style="background:transparent; border:none; color:white; cursor:pointer;">Kapat</button>
+            </div>
+        </div>
+    </div>
+
     <!-- KANAL AYARLARI MODALI -->
     <div class="modal" id="channelSettingsModal">
         <div class="modal-box">
             <h3>Kanal Ayarları</h3>
             <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kanal Adı</label>
             <input type="text" id="editChannelNameInput">
+            <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kategori</label>
+            <select id="editChannelCategorySelect" style="width:100%; padding:12px; background-color:#0d0d1f; border:1px solid transparent; border-radius:6px; color:white; margin-bottom:16px; outline:none; font-size:14px;">
+                <option value="">Kategorisiz</option>
+            </select>
             <div class="modal-footer">
                 <button onclick="closeChannelSettingsModal()" style="background:transparent; border:none; color:white; cursor:pointer; font-weight:500;">İptal</button>
                 <button onclick="updateChannelSettings()" class="auth-btn" style="width: auto; padding: 8px 20px;">Kaydet</button>
@@ -270,7 +328,30 @@
         </div>
     </div>
 
-    <!-- KULLANICI AYARLARI MODALI (GÜNCELLENMİŞ - PROFİL FOTOĞRAFI DEĞİŞTİRME EKLENDİ) -->
+    <!-- KATEGORİ OLUŞTURMA MODALI -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-box">
+            <h3>Kategori Oluştur</h3>
+            <input type="text" id="categoryNameInput" placeholder="kategori-adi">
+            <div class="modal-footer">
+                <button onclick="closeCategoryModal()" style="background:transparent; border:none; color:white; cursor:pointer; font-weight:500;">İptal</button>
+                <button onclick="createCategory()" class="auth-btn" style="width: auto; padding: 8px 20px;">Oluştur</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KULLANICI PROFİLİ GÖRÜNTÜLEME MODALI -->
+    <div class="modal" id="userProfileModal">
+        <div class="modal-box profile-card-modal">
+            <div class="profile-card-avatar" id="profileModalAvatar">V</div>
+            <h3 id="profileModalUsername" style="margin:0;">Kullanıcı</h3>
+            <p id="profileModalBio" style="color: #b8bfe0; font-size: 14px;">Açıklama yok.</p>
+            <div id="profileModalActions" style="margin-top: 10px; display: flex; gap: 10px;"></div>
+            <button onclick="closeUserProfileModal()" style="background:transparent; border:none; color:#b8bfe0; cursor:pointer; margin-top: 10px;">Kapat</button>
+        </div>
+    </div>
+
+    <!-- KULLANICI AYARLARI MODALI -->
     <div class="modal" id="userSettingsModal">
         <div class="modal-box">
             <h3>Kullanıcı Ayarları</h3>
@@ -284,15 +365,18 @@
             <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kullanıcı Adınız</label>
             <input type="text" id="editUsernameInput" oninput="checkUserFormChanges()">
 
-            <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Mevcut Şifreniz (Şifre değiştirecekseniz gerekli)</label>
+            <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kullanıcı Açıklaması (Biyografi)</label>
+            <textarea id="editUserBioInput" rows="3" placeholder="Kendinizden bahsedin..." oninput="checkUserFormChanges()"></textarea>
+
+            <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Mevcut Şifreniz</label>
             <input type="password" id="oldPasswordInput" placeholder="••••••••" oninput="checkUserFormChanges()">
 
             <label style="font-size:12px; color:#b8bfe0; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Yeni Şifreniz</label>
             <input type="password" id="newPasswordInput" placeholder="••••••••" oninput="checkUserFormChanges()">
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 15px;">
-                <button onclick="executeLogout()" style="background-color: #a855f7; border:none; color:white; padding: 8px 14px; border-radius: 6px; cursor:pointer; font-weight: 600; font-size: 13px; transition: background 0.2s;">Oturumu Kapat</button>
-                <button id="saveUserChangesBtn" onclick="executeUserSettingsUpdate()" class="auth-btn" style="width: auto; padding: 8px 20px; display: none;">Değişiklikleri Kaydet</button>
+                <button onclick="executeLogout()" style="background-color: #a855f7; border:none; color:white; padding: 8px 14px; border-radius: 6px; cursor:pointer; font-weight: 600; font-size: 13px;">Oturumu Kapat</button>
+                <button id="saveUserChangesBtn" onclick="executeUserSettingsUpdate()" class="auth-btn" style="width: auto; padding: 8px 20px; display: none;">Kaydet</button>
             </div>
             <div id="userSettingsMessage" style="font-size: 13px; text-align: center; margin-top: 5px;"></div>
             <div style="text-align: right; margin-top: 10px;">
@@ -307,21 +391,31 @@
         let servers = [];
         let currentServer = null;
         let currentChannel = null;
+        let currentDmUser = null;
         let isLoginMode = true;
         let tempServerIcon = null;
         let tempSettingsAvatar = null;
         let targetChannelForEdit = null;
         let initialUsernameForEdit = "";
+        let targetCategoryForNewChannel = null;
 
-        // ==== YEREL VERİTABANI (backend gerektirmez, her şey tarayıcıda saklanır) ====
-        const DB_KEY = 'voidup_db';
+        const DB_KEY = 'voidup_db_v2';
 
         function loadDB() {
             const raw = localStorage.getItem(DB_KEY);
-            if (raw) return JSON.parse(raw);
-            const fresh = { users: {}, servers: [] };
-            localStorage.setItem(DB_KEY, JSON.stringify(fresh));
-            return fresh;
+            let db;
+            if (raw) db = JSON.parse(raw);
+            else db = { users: {}, servers: [], dms: {} };
+            
+            db.servers.forEach(srv => {
+                if (!srv.categories) srv.categories = [];
+                if (!srv.description) srv.description = "";
+                if (!srv.roles) srv.roles = [];
+                if (!srv.members) srv.members = [srv.owner];
+                if (!srv.memberRoles) srv.memberRoles = {}; // { username: [roleId] }
+                srv.channels.forEach(ch => { if (ch.categoryId === undefined) ch.categoryId = null; });
+            });
+            return db;
         }
 
         function saveDB(db) {
@@ -336,22 +430,17 @@
             register(username, password) {
                 const db = loadDB();
                 if (db.users[username]) return { ok: false, error: 'Bu kullanıcı adı zaten alınmış!' };
-                db.users[username] = { username, password, avatar: null };
+                db.users[username] = { username, password, avatar: null, bio: '' };
                 saveDB(db);
-                return { ok: true, user: { username, avatar: null } };
+                return { ok: true, user: { username, avatar: null, bio: '' } };
             },
             login(username, password) {
                 const db = loadDB();
                 const user = db.users[username];
                 if (!user || user.password !== password) return { ok: false, error: 'Kullanıcı adı veya şifre hatalı!' };
-                return { ok: true, user: { username: user.username, avatar: user.avatar } };
+                return { ok: true, user: { username: user.username, avatar: user.avatar, bio: user.bio } };
             },
-            updateAvatar(username, avatar) {
-                const db = loadDB();
-                if (db.users[username]) { db.users[username].avatar = avatar; saveDB(db); }
-                return { ok: true };
-            },
-            updateUser(currentUsername, newUsername, oldPassword, newPassword, avatar) {
+            updateUser(currentUsername, newUsername, oldPassword, newPassword, avatar, bio) {
                 const db = loadDB();
                 const user = db.users[currentUsername];
                 if (!user) return { ok: false, error: 'Kullanıcı bulunamadı!' };
@@ -367,19 +456,31 @@
                     db.servers.forEach(srv => {
                         if (srv.owner === currentUsername) srv.owner = newUsername;
                         srv.members = srv.members.map(m => m === currentUsername ? newUsername : m);
+                        if (srv.memberRoles && srv.memberRoles[currentUsername]) {
+                            srv.memberRoles[newUsername] = srv.memberRoles[currentUsername];
+                            delete srv.memberRoles[currentUsername];
+                        }
                         srv.channels.forEach(ch => ch.messages.forEach(msg => {
                             if (msg.username === currentUsername) msg.username = newUsername;
                         }));
                     });
                 }
                 if (avatar !== undefined) user.avatar = avatar;
+                if (bio !== undefined) user.bio = bio;
                 saveDB(db);
-                return { ok: true, user: { username: user.username, avatar: user.avatar } };
+                return { ok: true, user: { username: user.username, avatar: user.avatar, bio: user.bio } };
             },
             getServers() { return loadDB().servers; },
             createServer(name, owner, icon) {
                 const db = loadDB();
-                const server = { id: genId('srv'), name, owner, icon: icon || null, members: [owner], channels: [{ id: genId('ch'), name: 'genel', messages: [] }] };
+                const count = db.servers.length;
+                if (count >= 50) return { ok: false, error: 'Sunucu oluşturma limiti (50) doldu!' };
+                
+                const server = { 
+                    id: genId('srv'), name, description: '', owner, icon: icon || null, 
+                    members: [owner], memberRoles: {}, roles: [], categories: [], 
+                    channels: [{ id: genId('ch'), name: 'genel', categoryId: null, messages: [] }] 
+                };
                 db.servers.push(server);
                 saveDB(db);
                 return { ok: true, server };
@@ -390,11 +491,12 @@
                 saveDB(db);
                 return { ok: true };
             },
-            updateServer(serverId, name, icon) {
+            updateServer(serverId, name, description, icon) {
                 const db = loadDB();
                 const srv = db.servers.find(s => s.id === serverId);
                 if (!srv) return { ok: false };
                 srv.name = name;
+                srv.description = description;
                 if (icon !== undefined) srv.icon = icon;
                 saveDB(db);
                 return { ok: true, server: srv };
@@ -403,25 +505,83 @@
                 const db = loadDB();
                 const srv = db.servers.find(s => s.id === serverId);
                 if (!srv) return { ok: false };
+                if (srv.members.length >= 100 && !srv.members.includes(username)) {
+                    return { ok: false, error: 'Sunucu üye limiti (100) doldu!' };
+                }
                 if (!srv.members.includes(username)) srv.members.push(username);
                 saveDB(db);
                 return { ok: true, server: srv };
             },
-            createChannel(serverId, name) {
+            createRole(serverId, name, canBan, canDel) {
                 const db = loadDB();
                 const srv = db.servers.find(s => s.id === serverId);
                 if (!srv) return { ok: false };
-                srv.channels.push({ id: genId('ch'), name, messages: [] });
+                const role = { id: genId('role'), name, canBan, canDel };
+                srv.roles.push(role);
                 saveDB(db);
                 return { ok: true, server: srv };
             },
-            updateChannel(serverId, channelId, name) {
+            deleteRole(serverId, roleId) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                srv.roles = srv.roles.filter(r => r.id !== roleId);
+                for (let m in srv.memberRoles) {
+                    srv.memberRoles[m] = srv.memberRoles[m].filter(r => r !== roleId);
+                }
+                saveDB(db);
+                return { ok: true, server: srv };
+            },
+            toggleMemberRole(serverId, username, roleId) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                if (!srv.memberRoles) srv.memberRoles = {};
+                if (!srv.memberRoles[username]) srv.memberRoles[username] = [];
+                
+                const idx = srv.memberRoles[username].indexOf(roleId);
+                if (idx > -1) {
+                    srv.memberRoles[username].splice(idx, 1);
+                } else {
+                    srv.memberRoles[username].push(roleId);
+                }
+                saveDB(db);
+                return { ok: true, server: srv };
+            },
+            createChannel(serverId, name, categoryId = null) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                srv.channels.push({ id: genId('ch'), name, categoryId: categoryId || null, messages: [] });
+                saveDB(db);
+                return { ok: true, server: srv };
+            },
+            updateChannel(serverId, channelId, name, categoryId) {
                 const db = loadDB();
                 const srv = db.servers.find(s => s.id === serverId);
                 if (!srv) return { ok: false };
                 const ch = srv.channels.find(c => c.id === channelId);
                 if (!ch) return { ok: false };
                 ch.name = name;
+                if (categoryId !== undefined) ch.categoryId = categoryId || null;
+                saveDB(db);
+                return { ok: true, server: srv };
+            },
+            createCategory(serverId, name) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                if (!srv.categories) srv.categories = [];
+                srv.categories.push({ id: genId('cat'), name });
+                saveDB(db);
+                return { ok: true, server: srv };
+            },
+            deleteCategory(serverId, categoryId) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                srv.categories = (srv.categories || []).filter(c => c.id !== categoryId);
+                srv.channels.forEach(ch => { if (ch.categoryId === categoryId) ch.categoryId = null; });
                 saveDB(db);
                 return { ok: true, server: srv };
             },
@@ -449,6 +609,52 @@
                 ch.messages.push({ id: genId('msg'), username, avatar, text });
                 saveDB(db);
                 return { ok: true };
+            },
+            editMessage(serverId, channelId, msgId, newText) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                const ch = srv.channels.find(c => c.id === channelId);
+                if (!ch) return { ok: false };
+                const msg = ch.messages.find(m => m.id === msgId);
+                if (msg) {
+                    msg.text = newText;
+                    saveDB(db);
+                }
+                return { ok: true };
+            },
+            deleteMessage(serverId, channelId, msgId) {
+                const db = loadDB();
+                const srv = db.servers.find(s => s.id === serverId);
+                if (!srv) return { ok: false };
+                const ch = srv.channels.find(c => c.id === channelId);
+                if (!ch) return { ok: false };
+                ch.messages = ch.messages.filter(m => m.id !== msgId);
+                saveDB(db);
+                return { ok: true };
+            },
+            getDmKey(user1, user2) {
+                return [user1, user2].sort().join('_');
+            },
+            getDmMessages(user1, user2) {
+                const db = loadDB();
+                if (!db.dms) db.dms = {};
+                const key = this.getDmKey(user1, user2);
+                return db.dms[key] || [];
+            },
+            postDmMessage(user1, user2, username, avatar, text) {
+                const db = loadDB();
+                if (!db.dms) db.dms = {};
+                const key = this.getDmKey(user1, user2);
+                if (!db.dms[key]) db.dms[key] = [];
+                db.dms[key].push({ id: genId('dm'), username, avatar, text });
+                saveDB(db);
+                return { ok: true };
+            },
+            getUserProfile(username) {
+                const db = loadDB();
+                const u = db.users[username];
+                return u ? { username: u.username, avatar: u.avatar, bio: u.bio || '' } : null;
             }
         };
 
@@ -514,24 +720,6 @@
             }
         }
 
-        function triggerAvatarUpload() {
-            document.getElementById('avatarFileInput').click();
-        }
-
-        function handleUserAvatarFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                currentAvatar = e.target.result;
-                localStorage.setItem('voidup_logged_avatar', currentAvatar);
-                updateAvatarElements();
-                localApi.updateAvatar(currentUser, currentAvatar);
-            };
-            reader.readAsDataURL(file);
-        }
-
         function triggerServerIconUpload() {
             document.getElementById('serverIconFileInput').click();
         }
@@ -550,7 +738,6 @@
             reader.readAsDataURL(file);
         }
 
-        /* YENİ EKLENEN KULLANICI AYARLARI FOTOĞRAF DEĞİŞTİRME FONKSİYONLARI */
         function triggerSettingsAvatarUpload() {
             document.getElementById('settingsAvatarFileInput').click();
         }
@@ -582,6 +769,7 @@
             const sidebar = document.getElementById('serversSidebar');
             sidebar.innerHTML = `
                 <div class="server-icon explore-btn" onclick="showExplore()" title="Keşfet">🌐</div>
+                <div class="server-icon dm-btn" onclick="showDirectMessages()" title="Özel Mesajlar">💬</div>
                 <div style="width: 32px; height: 2px; background-color: #282850; border-radius: 1px;"></div>
                 <div class="server-icon add-btn" onclick="openServerModal()" title="Sunucu Oluştur">+</div>
             `;
@@ -610,19 +798,6 @@
                     }
                 });
 
-                let pressTimer;
-                icon.addEventListener('touchstart', (e) => {
-                    pressTimer = setTimeout(() => {
-                        const touch = e.touches[0];
-                        if (srv.owner === currentUser) {
-                            showContextMenu(touch.clientX, touch.clientY, [
-                                { text: 'Sunucuyu Sil', danger: true, action: () => deleteServer(srv.id) }
-                            ]);
-                        }
-                    }, 800);
-                });
-                icon.addEventListener('touchend', () => { clearTimeout(pressTimer); });
-
                 sidebar.appendChild(icon);
             });
         }
@@ -638,11 +813,13 @@
         function showExplore() {
             currentServer = null;
             currentChannel = null;
+            currentDmUser = null;
             document.getElementById('exploreView').style.display = 'block';
             document.getElementById('chatView').style.display = 'none';
             document.getElementById('channelsHeader').textContent = "VOIDUP";
             document.getElementById('serverDropdown').style.display = 'none';
-            document.getElementById('chatHeader').textContent = "Keşfet";
+            document.getElementById('chatHeaderTitle').textContent = "Keşfet";
+            document.getElementById('chatHeaderDesc').textContent = "";
             renderExploreGrid();
             renderServersSidebar();
         }
@@ -650,7 +827,11 @@
         function renderExploreGrid() {
             const grid = document.getElementById('exploreGrid');
             grid.innerHTML = '';
-            servers.forEach(srv => {
+            
+            // Keşfet: üye sayısına göre çoktan aza sıralama
+            const sortedServers = [...servers].sort((a, b) => b.members.length - a.members.length);
+
+            sortedServers.forEach(srv => {
                 const card = document.createElement('div');
                 card.className = 'explore-card';
                 
@@ -664,6 +845,8 @@
                 card.innerHTML = `
                     <div class="server-icon" style="${iconStyle}">${iconText}</div>
                     <h3>${srv.name}</h3>
+                    <p>${srv.description || 'Açıklama yok.'}</p>
+                    <p style="font-size:11px; color:#2563eb;">Üye: ${srv.members.length}</p>
                     <button class="join-server-btn" onclick="joinServer('${srv.id}')">Katıl</button>
                 `;
                 grid.appendChild(card);
@@ -672,7 +855,12 @@
 
         async function joinServer(serverId) {
             const result = localApi.joinServer(serverId, currentUser);
+            if (!result.ok) {
+                alert(result.error);
+                return;
+            }
             currentServer = result.server;
+            currentDmUser = null;
             await fetchServers();
 
             document.getElementById('exploreView').style.display = 'none';
@@ -687,63 +875,138 @@
             }
         }
 
+        function showDirectMessages() {
+            currentServer = null;
+            currentChannel = null;
+            currentDmUser = null;
+            document.getElementById('exploreView').style.display = 'none';
+            document.getElementById('chatView').style.display = 'flex';
+            document.getElementById('channelsHeader').textContent = "ÖZEL MESAJLAR";
+            document.getElementById('serverDropdown').style.display = 'none';
+            document.getElementById('chatHeaderTitle').textContent = "DM";
+            document.getElementById('chatHeaderDesc').textContent = "Bir kullanıcı seçin";
+            
+            const list = document.getElementById('channelsList');
+            list.innerHTML = `<div style="font-size:12px; font-weight:bold; color:#9098c0; margin-bottom:8px;">KULLANICILAR</div>`;
+            
+            const db = loadDB();
+            Object.keys(db.users).forEach(uname => {
+                if (uname === currentUser) return;
+                const item = document.createElement('div');
+                item.className = 'channel-item';
+                item.innerHTML = `<span>@ ${uname}</span>`;
+                item.onclick = () => selectDmUser(uname);
+                list.appendChild(item);
+            });
+            renderServersSidebar();
+            document.getElementById('chatMessages').innerHTML = '<div style="color:#9098c0; text-align:center;">Özel mesajlaşmak için soldan bir kullanıcı seçin.</div>';
+        }
+
+        function selectDmUser(username) {
+            currentDmUser = username;
+            document.getElementById('chatHeaderTitle').textContent = `@ ${username}`;
+            document.getElementById('chatHeaderDesc').textContent = "Özel Sohbet";
+            fetchDmMessages();
+        }
+
+        function fetchDmMessages() {
+            if (!currentDmUser) return;
+            const messages = localApi.getDmMessages(currentUser, currentDmUser);
+            renderMessages(messages, true);
+        }
+
         function updateHeaderDisplay() {
             const header = document.getElementById('channelsHeader');
-            if (currentServer.owner === currentUser) {
-                header.innerHTML = `<span>${currentServer.name}</span> <span style="font-size:12px;">▼</span>`;
-            } else {
-                header.innerHTML = `<span>${currentServer.name}</span>`;
-            }
+            header.innerHTML = `<span>${currentServer.name}</span> <span style="font-size:12px;">▼</span>`;
+            document.getElementById('chatHeaderDesc').textContent = currentServer.description || '';
+            
+            // Yetki gizleme/gösterme
+            const isOwner = currentServer.owner === currentUser;
+            document.getElementById('menuServerSettings').style.display = isOwner ? 'flex' : 'none';
+            document.getElementById('menuServerRoles').style.display = isOwner ? 'flex' : 'none';
+            document.getElementById('menuServerCat').style.display = isOwner ? 'flex' : 'none';
+            document.getElementById('menuServerChan').style.display = isOwner ? 'flex' : 'none';
         }
 
         function toggleServerDropdown() {
-            if (!currentServer || currentServer.owner !== currentUser) return;
             const dropdown = document.getElementById('serverDropdown');
             dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-            document.getElementById('memberCount').textContent = currentServer.members.length;
+            document.getElementById('memberCount').textContent = currentServer ? currentServer.members.length : 1;
         }
 
         function renderChannelsList() {
             const list = document.getElementById('channelsList');
             const isOwner = currentServer && currentServer.owner === currentUser;
+            list.innerHTML = '';
 
-            list.innerHTML = `<div style="font-size:12px; font-weight:bold; color:#9098c0; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; text-transform:uppercase; letter-spacing:0.5px;">
-                <span>METİN KANALLARI</span>
-                ${isOwner ? `<span style="cursor:pointer; font-size:16px;" onclick="openChannelModal()">+</span>` : ''}
-            </div>`;
+            const categories = currentServer.categories || [];
+            const uncategorized = currentServer.channels.filter(ch => !ch.categoryId);
 
-            currentServer.channels.forEach(ch => {
-                const item = document.createElement('div');
-                item.className = `channel-item ${currentChannel && currentChannel.id === ch.id ? 'active' : ''}`;
-                item.innerHTML = `<span># ${ch.name}</span>`;
-                item.onclick = () => selectChannel(ch.id);
+            const uncatHeader = document.createElement('div');
+            uncatHeader.style.cssText = "font-size:12px; font-weight:bold; color:#9098c0; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; text-transform:uppercase;";
+            uncatHeader.innerHTML = `<span>KANALLAR</span>${isOwner ? `<span style="cursor:pointer; font-size:16px;" onclick="openChannelModal(null)">+</span>` : ''}`;
+            list.appendChild(uncatHeader);
 
-                const openChannelMenu = (clientX, clientY) => {
-                    if (isOwner) {
-                        let menuOptions = [{ text: 'Kanal Ayarları', action: () => openChannelSettingsModal(ch) }];
-                        if (currentServer.channels.length > 1) {
-                            menuOptions.push({ text: 'Kanalı Sil', danger: true, action: () => deleteChannel(ch.id) });
-                        }
-                        showContextMenu(clientX, clientY, menuOptions);
-                    }
-                };
+            uncategorized.forEach(ch => appendChannelItem(list, ch, isOwner));
 
+            categories.forEach(cat => {
+                const catHeader = document.createElement('div');
+                catHeader.style.cssText = "font-size:12px; font-weight:bold; color:#9098c0; margin: 16px 0 8px; display:flex; justify-content:space-between; align-items:center; text-transform:uppercase;";
+                catHeader.innerHTML = `<span>▾ ${cat.name}</span>${isOwner ? `<span style="cursor:pointer; font-size:16px;" onclick="openChannelModal('${cat.id}')">+</span>` : ''}`;
+
+                if (isOwner) {
+                    catHeader.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        showContextMenu(e.clientX, e.clientY, [
+                            { text: 'Kategoriyi Sil', danger: true, action: () => deleteCategory(cat.id) }
+                        ]);
+                    });
+                }
+                list.appendChild(catHeader);
+
+                const catChannels = currentServer.channels.filter(ch => ch.categoryId === cat.id);
+                catChannels.forEach(ch => appendChannelItem(list, ch, isOwner));
+            });
+
+            // Üyeler Listesi (Rol yönetimi için)
+            const memberHeader = document.createElement('div');
+            memberHeader.style.cssText = "font-size:12px; font-weight:bold; color:#9098c0; margin: 20px 0 8px; text-transform:uppercase;";
+            memberHeader.textContent = `ÜYELER (${currentServer.members.length})`;
+            list.appendChild(memberHeader);
+
+            currentServer.members.forEach(member => {
+                const mItem = document.createElement('div');
+                mItem.className = 'channel-item';
+                mItem.innerHTML = `<span>@ ${member}</span>`;
+                mItem.onclick = () => showUserProfile(member);
+                if (isOwner && member !== currentUser) {
+                    mItem.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        showContextMenu(e.clientX, e.clientY, [
+                            { text: 'Rolleri Yönet', action: () => openMemberRolesModal(member) }
+                        ]);
+                    });
+                }
+                list.appendChild(mItem);
+            });
+        }
+
+        function appendChannelItem(list, ch, isOwner) {
+            const item = document.createElement('div');
+            item.className = `channel-item ${currentChannel && currentChannel.id === ch.id ? 'active' : ''}`;
+            item.innerHTML = `<span># ${ch.name}</span>`;
+            item.onclick = () => selectChannel(ch.id);
+
+            if (isOwner) {
                 item.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
-                    openChannelMenu(e.clientX, e.clientY);
+                    showContextMenu(e.clientX, e.clientY, [
+                        { text: 'Kanal Ayarları', action: () => openChannelSettingsModal(ch) },
+                        { text: 'Kanalı Sil', danger: true, action: () => deleteChannel(ch.id) }
+                    ]);
                 });
-
-                let pressTimer;
-                item.addEventListener('touchstart', (e) => {
-                    pressTimer = setTimeout(() => {
-                        const touch = e.touches[0];
-                        openChannelMenu(touch.clientX, touch.clientY);
-                    }, 800);
-                });
-                item.addEventListener('touchend', () => { clearTimeout(pressTimer); });
-
-                list.appendChild(item);
-            });
+            }
+            list.appendChild(item);
         }
 
         async function deleteChannel(channelId) {
@@ -751,28 +1014,42 @@
             currentServer = result.server;
             renderChannelsList();
             if (currentChannel && currentChannel.id === channelId) {
-                if (currentServer.channels.length > 0) {
-                    selectChannel(currentServer.channels[0].id);
-                }
+                if (currentServer.channels.length > 0) selectChannel(currentServer.channels[0].id);
             }
         }
 
         async function selectChannel(channelId) {
             currentChannel = currentServer.channels.find(c => c.id === channelId);
+            currentDmUser = null;
             renderChannelsList();
-            document.getElementById('chatHeader').textContent = `# ${currentChannel.name}`;
+            document.getElementById('chatHeaderTitle').textContent = `# ${currentChannel.name}`;
             await fetchMessages();
         }
 
         async function fetchMessages() {
             if (!currentServer || !currentChannel) return;
             const messages = localApi.getMessages(currentServer.id, currentChannel.id);
-            renderMessages(messages);
+            renderMessages(messages, false);
         }
 
-        function renderMessages(messages) {
+        function hasPermission(actionType) {
+            if (!currentServer) return false;
+            if (currentServer.owner === currentUser) return true;
+            const userRoles = (currentServer.memberRoles && currentServer.memberRoles[currentUser]) || [];
+            for (let rId of userRoles) {
+                const role = currentServer.roles.find(r => r.id === rId);
+                if (role) {
+                    if (actionType === 'ban' && role.canBan) return true;
+                    if (actionType === 'del' && role.canDel) return true;
+                }
+            }
+            return false;
+        }
+
+        function renderMessages(messages, isDm) {
             const container = document.getElementById('chatMessages');
             container.innerHTML = '';
+            
             messages.forEach(msg => {
                 const row = document.createElement('div');
                 row.className = 'message-row';
@@ -784,14 +1061,22 @@
                     avatarText = '';
                 }
 
+                const canModify = isDm || (msg.username === currentUser) || hasPermission('del');
+
                 row.innerHTML = `
-                    <div class="msg-avatar" style="${avatarStyle}">${avatarText}</div>
+                    <div class="msg-avatar" style="${avatarStyle}" onclick="showUserProfile('${msg.username}')">${avatarText}</div>
                     <div class="msg-body">
                         <div class="msg-header">
-                            <span class="msg-username">${msg.username}</span>
+                            <span class="msg-username" onclick="showUserProfile('${msg.username}')">${msg.username}</span>
                         </div>
-                        <div class="msg-text">${msg.text}</div>
+                        <div class="msg-text" id="msg-text-${msg.id}">${msg.text}</div>
                     </div>
+                    ${canModify ? `
+                        <div class="msg-actions">
+                            ${msg.username === currentUser ? `<button class="msg-action-btn" onclick="startEditMessage('${msg.id}', '${isDm}')">Düzenle</button>` : ''}
+                            <button class="msg-action-btn" onclick="deleteMessage('${msg.id}', '${isDm}')" style="color:#a855f7;">Sil</button>
+                        </div>
+                    ` : ''}
                 `;
                 container.appendChild(row);
             });
@@ -799,17 +1084,88 @@
         }
 
         async function handleMessageSend(e) {
-            if (e.key === 'Enter' && currentServer && currentChannel) {
+            if (e.key === 'Enter') {
                 const input = document.getElementById('messageInput');
                 const text = input.value.trim();
                 if (!text) return;
 
-                localApi.postMessage(currentServer.id, currentChannel.id, currentUser, currentAvatar, text);
-
-                input.value = '';
-                await fetchMessages();
+                if (currentDmUser) {
+                    localApi.postDmMessage(currentUser, currentDmUser, currentUser, currentAvatar, text);
+                    input.value = '';
+                    fetchDmMessages();
+                } else if (currentServer && currentChannel) {
+                    localApi.postMessage(currentServer.id, currentChannel.id, currentUser, currentAvatar, text);
+                    input.value = '';
+                    await fetchMessages();
+                }
             }
         }
+
+        function startEditMessage(msgId, isDm) {
+            const textEl = document.getElementById(`msg-text-${msgId}`);
+            const currentText = textEl.textContent;
+            const newText = prompt("Mesajı düzenle:", currentText);
+            if (newText !== null && newText.trim() !== "") {
+                if (isDm === 'true') {
+                    // DM düzenleme basitçe local db
+                    const db = loadDB();
+                    const key = localApi.getDmKey(currentUser, currentDmUser);
+                    const msg = db.dms[key].find(m => m.id === msgId);
+                    if (msg) { msg.text = newText; saveDB(db); fetchDmMessages(); }
+                } else {
+                    localApi.editMessage(currentServer.id, currentChannel.id, msgId, newText);
+                    fetchMessages();
+                }
+            }
+        }
+
+        function deleteMessage(msgId, isDm) {
+            if (isDm === 'true') {
+                const db = loadDB();
+                const key = localApi.getDmKey(currentUser, currentDmUser);
+                db.dms[key] = db.dms[key].filter(m => m.id !== msgId);
+                saveDB(db);
+                fetchDmMessages();
+            } else {
+                localApi.deleteMessage(currentServer.id, currentChannel.id, msgId);
+                fetchMessages();
+            }
+        }
+
+        function showUserProfile(username) {
+            const user = localApi.getUserProfile(username);
+            if (!user) return;
+            
+            document.getElementById('profileModalUsername').textContent = user.username;
+            document.getElementById('profileModalBio').textContent = user.bio || 'Açıklama yok.';
+            
+            const avatarEl = document.getElementById('profileModalAvatar');
+            if (user.avatar && user.avatar.startsWith('data:image')) {
+                avatarEl.style.backgroundImage = `url(${user.avatar})`;
+                avatarEl.textContent = '';
+            } else {
+                avatarEl.style.backgroundImage = 'none';
+                avatarEl.textContent = user.username.charAt(0).toUpperCase();
+            }
+
+            const actionsEl = document.getElementById('profileModalActions');
+            actionsEl.innerHTML = '';
+            if (username !== currentUser) {
+                const dmBtn = document.createElement('button');
+                dmBtn.className = 'auth-btn';
+                dmBtn.style.padding = '6px 12px';
+                dmBtn.textContent = 'Özel Mesaj Gönder';
+                dmBtn.onclick = () => {
+                    closeUserProfileModal();
+                    showDirectMessages();
+                    selectDmUser(username);
+                };
+                actionsEl.appendChild(dmBtn);
+            }
+
+            document.getElementById('userProfileModal').style.display = 'flex';
+        }
+        function closeUserProfileModal() { document.getElementById('userProfileModal').style.display = 'none'; }
 
         function showContextMenu(x, y, options) {
             const menu = document.getElementById('context-menu');
@@ -843,12 +1199,15 @@
                 tempServerIcon = null;
                 closeServerModal();
                 await fetchServers();
+            } else {
+                alert(result.error);
             }
         }
 
         function openSettingsModal() {
             if (!currentServer) return;
             document.getElementById('editServerNameInput').value = currentServer.name;
+            document.getElementById('editServerDescInput').value = currentServer.description || '';
             tempServerIcon = currentServer.icon;
             const preview = document.getElementById('previewServerIcon');
             if (tempServerIcon && tempServerIcon.startsWith('data:image')) {
@@ -866,9 +1225,10 @@
 
         async function updateServerSettings() {
             const name = document.getElementById('editServerNameInput').value.trim();
+            const desc = document.getElementById('editServerDescInput').value.trim();
             if (!name) return;
 
-            const result = localApi.updateServer(currentServer.id, name, tempServerIcon);
+            const result = localApi.updateServer(currentServer.id, name, desc, tempServerIcon);
             if (result.ok) {
                 currentServer = result.server;
                 closeSettingsModal();
@@ -877,14 +1237,110 @@
             }
         }
 
-        function openChannelModal() { document.getElementById('channelModal').style.display = 'flex'; }
-        function closeChannelModal() { document.getElementById('channelModal').style.display = 'none'; document.getElementById('channelNameInput').value = ''; }
+        function openRolesModal() {
+            document.getElementById('serverDropdown').style.display = 'none';
+            renderRolesList();
+            document.getElementById('rolesModal').style.display = 'flex';
+        }
+        function closeRolesModal() { document.getElementById('rolesModal').style.display = 'none'; }
+
+        function renderRolesList() {
+            const container = document.getElementById('rolesListContainer');
+            container.innerHTML = '';
+            if (!currentServer.roles || currentServer.roles.length === 0) {
+                container.innerHTML = '<div style="color:#9098c0; font-size:13px;">Henüz rol oluşturulmamış.</div>';
+                return;
+            }
+            currentServer.roles.forEach(role => {
+                const row = document.createElement('div');
+                row.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#0d0d1f; padding:8px; border-radius:6px;";
+                row.innerHTML = `
+                    <div>
+                        <span style="font-weight:bold; color:white;">${role.name}</span>
+                        <div style="font-size:11px; color:#9098c0;">Ban: ${role.canBan ? 'Evet' : 'Hayır'} | Sil: ${role.canDel ? 'Evet' : 'Hayır'}</div>
+                    </div>
+                    <button class="auth-btn" style="width:auto; padding:4px 8px; background:#a855f7;" onclick="deleteRole('${role.id}')">Sil</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        async function createRole() {
+            const name = document.getElementById('newRoleNameInput').value.trim();
+            const canBan = document.getElementById('rolePermBan').checked;
+            const canDel = document.getElementById('rolePermDel').checked;
+            if (!name) return;
+
+            const result = localApi.createRole(currentServer.id, name, canBan, canDel);
+            if (result.ok) {
+                currentServer = result.server;
+                document.getElementById('newRoleNameInput').value = '';
+                document.getElementById('rolePermBan').checked = false;
+                document.getElementById('rolePermDel').checked = false;
+                renderRolesList();
+            }
+        }
+
+        async function deleteRole(roleId) {
+            const result = localApi.deleteRole(currentServer.id, roleId);
+            if (result.ok) {
+                currentServer = result.server;
+                renderRolesList();
+            }
+        }
+
+        function openMemberRolesModal(username) {
+            const roles = currentServer.roles || [];
+            let html = `<h3>${username} - Rolleri</h3><div style="display:flex; flex-direction:column; gap:8px; max-height:200px; overflow-y:auto;">`;
+            
+            roles.forEach(role => {
+                const hasRole = currentServer.memberRoles && currentServer.memberRoles[username] && currentServer.memberRoles[username].includes(role.id);
+                html += `<label style="display:flex; align-items:center; gap:8px; color:white;"><input type="checkbox" ${hasRole ? 'checked' : ''} onchange="toggleMemberRole('${username}', '${role.id}')"> ${role.name}</label>`;
+            });
+            html += `</div><div class="modal-footer"><button onclick="closeRolesModal()" class="auth-btn" style="width:auto; padding:8px 20px;">Kapat</button></div>`;
+            
+            // Re-use rolesModal box content
+            document.querySelector('#rolesModal .modal-box').innerHTML = html;
+            document.getElementById('rolesModal').style.display = 'flex';
+        }
+
+        async function toggleMemberRole(username, roleId) {
+            const result = localApi.toggleMemberRole(currentServer.id, username, roleId);
+            if (result.ok) {
+                currentServer = result.server;
+            }
+        }
+
+        function openInviteModal() {
+            document.getElementById('serverDropdown').style.display = 'none';
+            document.getElementById('inviteLinkInput').value = `voidup://invite/${currentServer.id}`;
+            document.getElementById('inviteModal').style.display = 'flex';
+        }
+        function closeInviteModal() { document.getElementById('inviteModal').style.display = 'none'; }
+        function copyInviteLink() {
+            const copyText = document.getElementById('inviteLinkInput');
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            alert('Davet linki kopyalandı!');
+        }
+
+        function openChannelModal(categoryId) {
+            targetCategoryForNewChannel = categoryId || null;
+            document.getElementById('serverDropdown').style.display = 'none';
+            document.getElementById('channelModal').style.display = 'flex';
+        }
+        function closeChannelModal() {
+            document.getElementById('channelModal').style.display = 'none';
+            document.getElementById('channelNameInput').value = '';
+            targetCategoryForNewChannel = null;
+        }
+        function openChannelModalNoCategory() { openChannelModal(null); }
 
         async function createChannel() {
             const name = document.getElementById('channelNameInput').value.trim();
             if (!name) return;
 
-            const result = localApi.createChannel(currentServer.id, name);
+            const result = localApi.createChannel(currentServer.id, name, targetCategoryForNewChannel);
             if (result.ok) {
                 currentServer = result.server;
                 closeChannelModal();
@@ -895,22 +1351,60 @@
         function openChannelSettingsModal(ch) {
             targetChannelForEdit = ch;
             document.getElementById('editChannelNameInput').value = ch.name;
+
+            const select = document.getElementById('editChannelCategorySelect');
+            const categories = currentServer.categories || [];
+            select.innerHTML = `<option value="">Kategorisiz</option>` + categories.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
+            select.value = ch.categoryId || '';
+
             document.getElementById('channelSettingsModal').style.display = 'flex';
         }
         function closeChannelSettingsModal() { document.getElementById('channelSettingsModal').style.display = 'none'; targetChannelForEdit = null; }
 
         async function updateChannelSettings() {
             const name = document.getElementById('editChannelNameInput').value.trim();
+            const categoryId = document.getElementById('editChannelCategorySelect').value;
             if (!name || !targetChannelForEdit) return;
 
-            const result = localApi.updateChannel(currentServer.id, targetChannelForEdit.id, name);
+            const result = localApi.updateChannel(currentServer.id, targetChannelForEdit.id, name, categoryId);
             if (result.ok) {
+                const editedChannelId = targetChannelForEdit.id;
                 currentServer = result.server;
                 closeChannelSettingsModal();
                 renderChannelsList();
-                if (currentChannel && currentChannel.id === targetChannelForEdit.id) {
-                    document.getElementById('chatHeader').textContent = `# ${name}`;
+                if (currentChannel && currentChannel.id === editedChannelId) {
+                    document.getElementById('chatHeaderTitle').textContent = `# ${name}`;
                 }
+            }
+        }
+
+        function openCategoryModal() {
+            document.getElementById('serverDropdown').style.display = 'none';
+            document.getElementById('categoryModal').style.display = 'flex';
+        }
+        function closeCategoryModal() {
+            document.getElementById('categoryModal').style.display = 'none';
+            document.getElementById('categoryNameInput').value = '';
+        }
+
+        async function createCategory() {
+            const name = document.getElementById('categoryNameInput').value.trim();
+            if (!name) return;
+
+            const result = localApi.createCategory(currentServer.id, name);
+            if (result.ok) {
+                currentServer = result.server;
+                closeCategoryModal();
+                renderChannelsList();
+            }
+        }
+
+        async function deleteCategory(categoryId) {
+            if (!confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) return;
+            const result = localApi.deleteCategory(currentServer.id, categoryId);
+            if (result.ok) {
+                currentServer = result.server;
+                renderChannelsList();
             }
         }
 
@@ -918,6 +1412,7 @@
             initialUsernameForEdit = currentUser;
             tempSettingsAvatar = currentAvatar;
             document.getElementById('editUsernameInput').value = currentUser;
+            document.getElementById('editUserBioInput').value = localApi.getUserProfile(currentUser).bio || '';
             document.getElementById('oldPasswordInput').value = '';
             document.getElementById('newPasswordInput').value = '';
             document.getElementById('userSettingsMessage').textContent = '';
@@ -942,23 +1437,16 @@
 
         function checkUserFormChanges() {
             const newUsername = document.getElementById('editUsernameInput').value.trim();
-            const oldPass = document.getElementById('oldPasswordInput').value;
+            const newBio = document.getElementById('editUserBioInput').value.trim();
             const newPass = document.getElementById('newPasswordInput').value;
             const saveBtn = document.getElementById('saveUserChangesBtn');
 
-            const hasUsernameChanged = newUsername !== initialUsernameForEdit;
-            const hasPasswordChanged = newPass.length > 0;
-            const hasAvatarChanged = tempSettingsAvatar !== currentAvatar;
-
-            if (hasUsernameChanged || hasPasswordChanged || hasAvatarChanged) {
-                saveBtn.style.display = 'block';
-            } else {
-                saveBtn.style.display = 'none';
-            }
+            saveBtn.style.display = 'block';
         }
 
         async function executeUserSettingsUpdate() {
             const newUsername = document.getElementById('editUsernameInput').value.trim();
+            const newBio = document.getElementById('editUserBioInput').value.trim();
             const oldPassword = document.getElementById('oldPasswordInput').value;
             const newPassword = document.getElementById('newPasswordInput').value;
             const msgEl = document.getElementById('userSettingsMessage');
@@ -969,13 +1457,7 @@
                 return;
             }
 
-            if (newPassword && !oldPassword) {
-                msgEl.style.color = '#a855f7';
-                msgEl.textContent = 'Şifrenizi değiştirmek için mevcut şifrenizi girmeniz gerek!';
-                return;
-            }
-
-            const result = localApi.updateUser(currentUser, newUsername, oldPassword, newPassword, tempSettingsAvatar);
+            const result = localApi.updateUser(currentUser, newUsername, oldPassword, newPassword, tempSettingsAvatar, newBio);
             if (result.ok) {
                 currentUser = result.user.username;
                 currentAvatar = result.user.avatar;
