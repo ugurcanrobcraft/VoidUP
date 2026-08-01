@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX - Profesyonel İletişim Platformu</title>
+    <title>VoidUP - Profesyonel İletişimin Adresi</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'GG Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         body { background-color: #1e1f22; color: #dbdee1; height: 100vh; overflow: hidden; }
@@ -148,7 +148,7 @@
     <!-- GİRİŞ EKRANI -->
     <div id="auth-screen">
         <div class="auth-card">
-            <h2 id="formTitle">VORTEX'e Hoş Geldin</h2>
+            <h2 id="formTitle">VoidUP 'a Hoş Geldiniz</h2>
             <div class="auth-subtitle" id="formSubtitle">Devam etmek için giriş yap veya hesap oluştur.</div>
             <form id="authForm">
                 <div class="input-group">
@@ -217,7 +217,7 @@
     <div class="modal" id="serverModal">
         <div class="modal-box">
             <h3>Sunucu Oluştur</h3>
-            <input type="text" id="serverNameInput" placeholder="Sunucu adı">
+            <input type="text" id="serverNameInput" placeholder="Sunucu Adı">
             <div class="modal-footer">
                 <button onclick="closeServerModal()" style="background:transparent; border:none; color:white; cursor:pointer; font-weight:500;">İptal</button>
                 <button onclick="createServer()" class="auth-btn" style="width: auto; padding: 8px 20px;">Oluştur</button>
@@ -232,7 +232,7 @@
             <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Sunucu Adı</label>
             <input type="text" id="editServerNameInput">
             
-            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; display:block; margin-bottom:8px;">Sunucu İkonu / Profili</label>
+            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; display:block; margin-bottom:8px;">Sunucu İkonu</label>
             <div class="server-profile-edit-box">
                 <div class="preview-server-icon" id="previewServerIcon">S</div>
                 <button type="button" class="auth-btn" style="width: auto; padding: 8px 16px; font-size: 14px;" onclick="triggerServerIconUpload()">Profil Seç</button>
@@ -281,13 +281,13 @@
                 <button type="button" class="auth-btn" style="width: auto; padding: 8px 16px; font-size: 14px;" onclick="triggerSettingsAvatarUpload()">Fotoğraf Değiştir</button>
             </div>
 
-            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kullanıcı Adı</label>
+            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Kullanıcı Adınız</label>
             <input type="text" id="editUsernameInput" oninput="checkUserFormChanges()">
 
-            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Mevcut Şifre (Şifre değiştirecekseniz zorunlu)</label>
+            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Mevcut Şifreniz (Şifre değiştirecekseniz gerekli)</label>
             <input type="password" id="oldPasswordInput" placeholder="••••••••" oninput="checkUserFormChanges()">
 
-            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Yeni Şifre (Boş bırakırsanız değişmez)</label>
+            <label style="font-size:12px; color:#b5bac1; font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Yeni Şifreniz</label>
             <input type="password" id="newPasswordInput" placeholder="••••••••" oninput="checkUserFormChanges()">
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 15px;">
@@ -502,7 +502,7 @@
         }
 
         async function deleteServer(serverId) {
-            if (!confirm("Bu sunucuyu silmek istediğinize emin misiniz?")) return;
+            if (!confirm("Dikket! Bu Sunucuyu Silmek Istediğinize Emin Misiniz?") return;
             await fetch(`http://localhost:5000/api/servers/${serverId}`, { method: 'DELETE' });
             currentServer = null;
             showExplore();
@@ -866,7 +866,7 @@
 
             if (newPassword && !oldPassword) {
                 msgEl.style.color = '#ed4245';
-                msgEl.textContent = 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz!';
+                msgEl.textContent = 'Şifrenizi değiştirmek için mevcut şifrenizi girmeniz gerek!';
                 return;
             }
 
@@ -902,7 +902,7 @@
                 }
             } catch (err) {
                 msgEl.style.color = '#ed4245';
-                msgEl.textContent = 'Güncelleme sırasında hata oluştu!';
+                msgEl.textContent = 'Güncelleme zamanı hata oluştu!';
             }
         }
 
